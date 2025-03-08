@@ -32,13 +32,16 @@ st.markdown(
             text-align: center;
             font-size: 18px;
             padding: 10px;
-            background-color: #c70039;
-            color: white;
+            background-color: #ffffff;
+            color: #000000;
             border-radius: 8px;
         }
         .stAlert {
+            background-color: #ffcc00 !important;
             color: white !important;
             font-weight: bold;
+            padding: 10px;
+            border-radius: 8px;
         }
         .stMarkdown {
             color: #ffcc00;
@@ -70,9 +73,9 @@ if st.button("Submit Guess"):
     if st.session_state.attempts > 1:
         st.session_state.attempts -= 1
         if guess < st.session_state.number:
-            st.warning(f"📉 Too low! Attempts left: {st.session_state.attempts}", icon="⚠️")
+            st.markdown(f"<div class='stAlert'>📉 Too low! Attempts left: {st.session_state.attempts} ⚠️</div>", unsafe_allow_html=True)
         elif guess > st.session_state.number:
-            st.warning(f"📈 Too high! Attempts left: {st.session_state.attempts}", icon="⚠️")
+            st.markdown(f"<div class='stAlert'>📈 Too high! Attempts left: {st.session_state.attempts} ⚠️</div>", unsafe_allow_html=True)
         else:
             elapsed_time = round(time.time() - st.session_state.start_time, 2)
             st.success(f"🎊 Congratulations! You guessed the number {st.session_state.number} correctly in {elapsed_time} seconds! 🎉", icon="🏆")
