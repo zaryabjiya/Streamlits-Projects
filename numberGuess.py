@@ -10,14 +10,14 @@ st.markdown(
     """
     <style>
         .stApp {
-            background: linear-gradient(to right, #1e3c72, #2a5298);
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
             color: white;
             text-align: center;
             font-family: Arial, sans-serif;
         }
         .stButton>button {
-            background-color: #ffcc00;
-            color: black;
+            background-color: #ff5733;
+            color: white;
             padding: 12px 24px;
             font-size: 16px;
             border-radius: 8px;
@@ -26,7 +26,7 @@ st.markdown(
             cursor: pointer;
         }
         .stButton>button:hover {
-            background-color: #e6b800;
+            background-color: #c70039;
         }
         .guess-input {
             text-align: center;
@@ -82,7 +82,8 @@ if st.button("Submit Guess"):
             st.session_state.start_time = time.time()
             st.rerun()
     else:
-        st.error(f"😢 Out of guesses! The correct number was {st.session_state.number}. Try again!", icon="❌")
+        st.error(f"😢 Out of guesses! The correct number was **{st.session_state.number}**. Try again!", icon="❌")
+        time.sleep(2)  # Short delay to show the correct number
         st.session_state.number = random.randint(1, 100)
         st.session_state.attempts = 7
         st.session_state.start_time = time.time()
