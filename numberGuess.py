@@ -1,10 +1,11 @@
 import streamlit as st
 import random
+import time
 
 # Page Configurations
 st.set_page_config(page_title="Number Guessing Game", page_icon="🎮", layout="centered")
 
-# Custom CSS for Improved Styling
+# Custom CSS for Enhanced Styling
 st.markdown(
     """
     <style>
@@ -45,10 +46,14 @@ st.subheader("🤖 I have chosen a number between 1 and 100. Can you guess it? �
 if 'number' not in st.session_state or 'attempts' not in st.session_state:
     st.session_state.number = random.randint(1, 100)
     st.session_state.attempts = 7
+    st.session_state.start_time = time.time()
 
 # User Input
 st.write("**Enter your guess below:**")
 guess = st.number_input("Enter your guess:", min_value=1, max_value=100, step=1, key="guess_input")
+
+# Display Remaining Attempts
+st.write(f"🔥 Attempts Left: {st.session_state.attempts}/7")
 
 # Check Guess
 if st.button("Submit Guess"):
@@ -59,16 +64,19 @@ if st.button("Submit Guess"):
         elif guess > st.session_state.number:
             st.warning(f"📈 Too high! Attempts left: {st.session_state.attempts}")
         else:
-            st.success(f"🎊 Congratulations! You guessed the number {st.session_state.number} correctly! 🎉")
+            elapsed_time = round(time.time() - st.session_state.start_time, 2)
+            st.success(f"🎊 Congratulations! You guessed the number {st.session_state.number} correctly in {elapsed_time} seconds! 🎉")
             st.balloons()
             st.session_state.number = random.randint(1, 100)
             st.session_state.attempts = 7
-            st.experimental_rerun()
+            st.session_state.start_time = time.time()
+            st.rerun()
     else:
         st.error(f"😢 Out of guesses! The number was {st.session_state.number}.")
         st.session_state.number = random.randint(1, 100)
         st.session_state.attempts = 7
-        st.experimental_rerun()
+        st.session_state.start_time = time.time()
+        st.rerun()
 
 # Fun Fact Feature
 if st.button("Get a Fun Fact 🎲"):
@@ -76,7 +84,8 @@ if st.button("Get a Fun Fact 🎲"):
         "Did you know? The number 7 is considered lucky in many cultures! 🍀",
         "Fun Fact: The number 100 is a square number (10x10)! 🎲",
         "Interesting! The number 42 is known as the 'Answer to the Ultimate Question of Life' in The Hitchhiker's Guide to the Galaxy! 🚀",
-        "Guess what? The number 13 is considered unlucky in some places, but lucky in others! 😲"
+        "Guess what? The number 13 is considered unlucky in some places, but lucky in others! 😲",
+        "Did you know? The first prime number is 2, and it’s the only even prime! 🔢"
     ]
     st.info(random.choice(facts))
 
