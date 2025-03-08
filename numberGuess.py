@@ -10,14 +10,14 @@ st.markdown(
     """
     <style>
         .stApp {
-            background-color: #1a1a2e;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
             color: white;
             text-align: center;
             font-family: Arial, sans-serif;
         }
         .stButton>button {
-            background-color: #ff5733;
-            color: white;
+            background-color: #ffcc00;
+            color: black;
             padding: 12px 24px;
             font-size: 16px;
             border-radius: 8px;
@@ -26,12 +26,18 @@ st.markdown(
             cursor: pointer;
         }
         .stButton>button:hover {
-            background-color: #c70039;
+            background-color: #e6b800;
         }
         .guess-input {
             text-align: center;
             font-size: 18px;
             padding: 10px;
+            background-color: #ffffff;
+            color: #000000;
+            border-radius: 8px;
+        }
+        .stMarkdown {
+            color: #ffcc00;
         }
     </style>
     """,
@@ -53,7 +59,7 @@ st.write("**Enter your guess below:**")
 guess = st.number_input("Enter your guess:", min_value=1, max_value=100, step=1, key="guess_input")
 
 # Display Remaining Attempts
-st.write(f"🔥 Attempts Left: {st.session_state.attempts}/7")
+st.markdown(f"<h3 style='color: #ffcc00;'>🔥 Attempts Left: {st.session_state.attempts}/7</h3>", unsafe_allow_html=True)
 
 # Check Guess
 if st.button("Submit Guess"):
@@ -92,7 +98,7 @@ if st.button("Get a Fun Fact 🎲"):
 # Footer
 st.markdown(
     """
-    <div style='margin-top:50px; text-align:center; font-size:14px; color:white; font-weight:bold;'>
+    <div style='margin-top:50px; text-align:center; font-size:14px; color:#ffcc00; font-weight:bold;'>
         Developed by Zaryab Irfan 🚀
     </div>
     """,
