@@ -10,7 +10,7 @@ st.markdown(
     """
     <style>
         .stApp {
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            background: linear-gradient(to right, #141E30, #243B55);
             color: white;
             text-align: center;
             font-family: Arial, sans-serif;
@@ -36,21 +36,23 @@ st.markdown(
             color: #000000;
             border-radius: 8px;
         }
-        .stAlert {
-            background-color: #ffcc00 !important;
-            color: white !important;
+        .alert-box {
+            background-color: #ffcc00;
+            color: black;
             font-weight: bold;
             padding: 15px;
-            margin: 10px 0;
+            margin: 15px 0;
             border-radius: 8px;
+            text-align: center;
         }
-        .stMarkdown {
+        .fun-fact-box {
             background-color: #2a5298;
             color: white;
             font-weight: bold;
             padding: 15px;
             border-radius: 8px;
-            margin-top: 10px;
+            margin-top: 15px;
+            text-align: center;
         }
     </style>
     """,
@@ -79,9 +81,9 @@ if st.button("Submit Guess"):
     if st.session_state.attempts > 1:
         st.session_state.attempts -= 1
         if guess < st.session_state.number:
-            st.markdown(f"<div class='stAlert'>📉 Too low! Attempts left: {st.session_state.attempts} ⚠️</div>", unsafe_allow_html=True)
+            st.markdown(f"<div class='alert-box'>📉 Too low! Attempts left: {st.session_state.attempts} ⚠️</div>", unsafe_allow_html=True)
         elif guess > st.session_state.number:
-            st.markdown(f"<div class='stAlert'>📈 Too high! Attempts left: {st.session_state.attempts} ⚠️</div>", unsafe_allow_html=True)
+            st.markdown(f"<div class='alert-box'>📈 Too high! Attempts left: {st.session_state.attempts} ⚠️</div>", unsafe_allow_html=True)
         else:
             elapsed_time = round(time.time() - st.session_state.start_time, 2)
             st.success(f"🎊 Congratulations! You guessed the number {st.session_state.number} correctly in {elapsed_time} seconds! 🎉", icon="🏆")
@@ -91,7 +93,7 @@ if st.button("Submit Guess"):
             st.session_state.start_time = time.time()
             st.rerun()
     else:
-        st.error(f"😢 Out of guesses! The correct number was **{st.session_state.number}**. Try again!", icon="❌")
+        st.markdown(f"<div class='alert-box' style='background-color:#FF5733; color:white;'>😢 Out of guesses! The correct number was **{st.session_state.number}**. Try again!</div>", unsafe_allow_html=True)
         time.sleep(2)  # Short delay to show the correct number
         st.session_state.number = random.randint(1, 100)
         st.session_state.attempts = 7
@@ -107,7 +109,7 @@ if st.button("Get a Fun Fact 🎲"):
         "Guess what? The number 13 is considered unlucky in some places, but lucky in others! 😲",
         "Did you know? The first prime number is 2, and it’s the only even prime! 🔢"
     ]
-    st.markdown(f"<div class='stMarkdown'>{random.choice(facts)}</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='fun-fact-box'>{random.choice(facts)}</div>", unsafe_allow_html=True)
 
 # Footer
 st.markdown(
