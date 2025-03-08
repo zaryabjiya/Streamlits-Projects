@@ -1,2 +1,2 @@
-# Streamlits-Projects
+# Streamlit-Projects
 A collection of interactive Python apps built with Streamlit. 💻🎉
