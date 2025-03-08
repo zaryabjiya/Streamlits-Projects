@@ -48,23 +48,22 @@ if 'number' not in st.session_state or 'attempts' not in st.session_state:
 
 # User Input
 st.write("**Enter your guess below:**")
-guess = st.number_input("", min_value=1, max_value=100, step=1, key="guess_input")
+guess = st.number_input("Enter your guess:", min_value=1, max_value=100, step=1, key="guess_input")
 
 # Check Guess
 if st.button("Submit Guess"):
     if st.session_state.attempts > 0:
+        st.session_state.attempts -= 1
         if guess < st.session_state.number:
-            st.warning(f"📉 Too low! Attempts left: {st.session_state.attempts - 1}")
+            st.warning(f"📉 Too low! Attempts left: {st.session_state.attempts}")
         elif guess > st.session_state.number:
-            st.warning(f"📈 Too high! Attempts left: {st.session_state.attempts - 1}")
+            st.warning(f"📈 Too high! Attempts left: {st.session_state.attempts}")
         else:
             st.success(f"🎊 Congratulations! You guessed the number {st.session_state.number} correctly! 🎉")
             st.balloons()
             st.session_state.number = random.randint(1, 100)
             st.session_state.attempts = 7
             st.experimental_rerun()
-        
-        st.session_state.attempts -= 1
     else:
         st.error(f"😢 Out of guesses! The number was {st.session_state.number}.")
         st.session_state.number = random.randint(1, 100)
@@ -82,8 +81,11 @@ if st.button("Get a Fun Fact 🎲"):
     st.info(random.choice(facts))
 
 # Footer
-st.markdown("""
+st.markdown(
+    """
     <div style='margin-top:50px; text-align:center; font-size:14px; color:white; font-weight:bold;'>
         Developed by Zaryab Irfan 🚀
     </div>
-"""
+    """,
+    unsafe_allow_html=True
+)
