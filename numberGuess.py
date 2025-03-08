@@ -10,7 +10,7 @@ st.markdown(
     """
     <style>
         .stApp {
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            background: linear-gradient(to right, #1e3c72, #2a5298);
             color: white;
             text-align: center;
             font-family: Arial, sans-serif;
@@ -35,6 +35,10 @@ st.markdown(
             background-color: #ffffff;
             color: #000000;
             border-radius: 8px;
+        }
+        .stAlert {
+            color: white !important;
+            font-weight: bold;
         }
         .stMarkdown {
             color: #ffcc00;
@@ -63,22 +67,22 @@ st.markdown(f"<h3 style='color: #ffcc00;'>🔥 Attempts Left: {st.session_state.
 
 # Check Guess
 if st.button("Submit Guess"):
-    if st.session_state.attempts > 0:
+    if st.session_state.attempts > 1:
         st.session_state.attempts -= 1
         if guess < st.session_state.number:
-            st.warning(f"📉 Too low! Attempts left: {st.session_state.attempts}")
+            st.warning(f"📉 Too low! Attempts left: {st.session_state.attempts}", icon="⚠️")
         elif guess > st.session_state.number:
-            st.warning(f"📈 Too high! Attempts left: {st.session_state.attempts}")
+            st.warning(f"📈 Too high! Attempts left: {st.session_state.attempts}", icon="⚠️")
         else:
             elapsed_time = round(time.time() - st.session_state.start_time, 2)
-            st.success(f"🎊 Congratulations! You guessed the number {st.session_state.number} correctly in {elapsed_time} seconds! 🎉")
+            st.success(f"🎊 Congratulations! You guessed the number {st.session_state.number} correctly in {elapsed_time} seconds! 🎉", icon="🏆")
             st.balloons()
             st.session_state.number = random.randint(1, 100)
             st.session_state.attempts = 7
             st.session_state.start_time = time.time()
             st.rerun()
     else:
-        st.error(f"😢 Out of guesses! The number was {st.session_state.number}.")
+        st.error(f"😢 Out of guesses! The correct number was {st.session_state.number}. Try again!", icon="❌")
         st.session_state.number = random.randint(1, 100)
         st.session_state.attempts = 7
         st.session_state.start_time = time.time()
@@ -93,7 +97,7 @@ if st.button("Get a Fun Fact 🎲"):
         "Guess what? The number 13 is considered unlucky in some places, but lucky in others! 😲",
         "Did you know? The first prime number is 2, and it’s the only even prime! 🔢"
     ]
-    st.info(random.choice(facts))
+    st.info(random.choice(facts), icon="💡")
 
 # Footer
 st.markdown(
