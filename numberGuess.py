@@ -9,13 +9,13 @@ st.markdown(
     """
     <style>
         .stApp {
-            background-color: #121212;
+            background-color: #1a1a2e;
             color: white;
             text-align: center;
             font-family: Arial, sans-serif;
         }
         .stButton>button {
-            background-color: #00bfff;
+            background-color: #ff5733;
             color: white;
             padding: 12px 24px;
             font-size: 16px;
@@ -25,7 +25,7 @@ st.markdown(
             cursor: pointer;
         }
         .stButton>button:hover {
-            background-color: #009acd;
+            background-color: #c70039;
         }
         .guess-input {
             text-align: center;
@@ -42,7 +42,7 @@ st.title("🎯 Number Guessing Game")
 st.subheader("🤖 I have chosen a number between 1 and 100. Can you guess it? 🔢")
 
 # Initialize Game State
-if 'number' not in st.session_state:
+if 'number' not in st.session_state or 'attempts' not in st.session_state:
     st.session_state.number = random.randint(1, 100)
     st.session_state.attempts = 7
 
@@ -71,9 +71,19 @@ if st.button("Submit Guess"):
         st.session_state.attempts = 7
         st.experimental_rerun()
 
+# Fun Fact Feature
+if st.button("Get a Fun Fact 🎲"):
+    facts = [
+        "Did you know? The number 7 is considered lucky in many cultures! 🍀",
+        "Fun Fact: The number 100 is a square number (10x10)! 🎲",
+        "Interesting! The number 42 is known as the 'Answer to the Ultimate Question of Life' in The Hitchhiker's Guide to the Galaxy! 🚀",
+        "Guess what? The number 13 is considered unlucky in some places, but lucky in others! 😲"
+    ]
+    st.info(random.choice(facts))
+
 # Footer
 st.markdown("""
     <div style='margin-top:50px; text-align:center; font-size:14px; color:white; font-weight:bold;'>
         Developed by Zaryab Irfan 🚀
     </div>
-""", unsafe_allow_html=True)
+"""
