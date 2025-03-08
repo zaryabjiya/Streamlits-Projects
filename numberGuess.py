@@ -1,10 +1,10 @@
 import streamlit as st
 import random
 
-# Set up page configuration
+# Page Configurations
 st.set_page_config(page_title="Number Guessing Game", page_icon="🎮", layout="centered")
 
-# Custom Styling
+# Custom CSS for Styling
 st.markdown(
     """
     <style>
@@ -14,36 +14,35 @@ st.markdown(
             text-align: center;
         }
         .stButton>button {
-            background-color: #ffd700;
-            color: #000;
-            padding: 12px 26px;
+            background-color: #ffcc00;
+            color: black;
+            padding: 10px 24px;
             font-size: 18px;
             border-radius: 10px;
             border: none;
             font-weight: bold;
         }
         .stButton>button:hover {
-            background-color: #ffcc00;
+            background-color: #e6b800;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Game Title & Instructions
+# Title
 st.title("🎯 Number Guessing Game")
-st.markdown("""
-    <h4 style='text-align: center; color: #ffcc00;'>🤖 I have chosen a number between 1 and 100. Can you guess it? 🔢</h4>
-    """, unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color: #ffcc00;'>🤖 I have chosen a number between 1 and 100. Can you guess it? 🔢</h4>", unsafe_allow_html=True)
 
-# Initialize Session State if not already set
+# Initialize Game State
 if 'number' not in st.session_state:
     st.session_state.number = random.randint(1, 100)
     st.session_state.attempts = 7
 
-# User Input for Guess
+# User Input
 guess = st.number_input("Enter your guess: ", min_value=1, max_value=100, step=1)
 
+# Check Guess
 if st.button("Submit Guess"):
     if st.session_state.attempts > 0:
         if guess < st.session_state.number:
@@ -55,7 +54,6 @@ if st.button("Submit Guess"):
             st.balloons()
             st.session_state.number = random.randint(1, 100)
             st.session_state.attempts = 7
-            return  # ✅ Correct Placement
         
         st.session_state.attempts -= 1
     else:
@@ -64,4 +62,4 @@ if st.button("Submit Guess"):
         st.session_state.attempts = 7
 
 # Footer
-st.markdown("<div style='margin-top:50px; text-align:center; font-size:14px; color:#ddd; font-weight:bold;'>Developed by Zaryab Irfan 🚀</div>", unsafe_allow_html=True)
+st.markdown("<div style='margin-top:50px; text-align:center; font-size:14px; color:#ffcc00; font-weight:bold;'>Developed by Zaryab Irfan 🚀</div>", unsafe_allow_html=True)
