@@ -40,11 +40,17 @@ st.markdown(
             background-color: #ffcc00 !important;
             color: white !important;
             font-weight: bold;
-            padding: 10px;
+            padding: 15px;
+            margin: 10px 0;
             border-radius: 8px;
         }
         .stMarkdown {
-            color: #ffcc00;
+            background-color: #2a5298;
+            color: white;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
         }
     </style>
     """,
@@ -101,7 +107,7 @@ if st.button("Get a Fun Fact 🎲"):
         "Guess what? The number 13 is considered unlucky in some places, but lucky in others! 😲",
         "Did you know? The first prime number is 2, and it’s the only even prime! 🔢"
     ]
-    st.info(random.choice(facts), icon="💡")
+    st.markdown(f"<div class='stMarkdown'>{random.choice(facts)}</div>", unsafe_allow_html=True)
 
 # Footer
 st.markdown(
