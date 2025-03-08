@@ -66,4 +66,14 @@ if st.button("Submit Guess"):
         
         st.session_state.attempts -= 1
     else:
-        st.error(f"😢 Out of guesses! Th
+        st.error(f"😢 Out of guesses! The number was {st.session_state.number}.")
+        st.session_state.number = random.randint(1, 100)
+        st.session_state.attempts = 7
+        st.experimental_rerun()
+
+# Footer
+st.markdown("""
+    <div style='margin-top:50px; text-align:center; font-size:14px; color:white; font-weight:bold;'>
+        Developed by Zaryab Irfan 🚀
+    </div>
+""", unsafe_allow_html=True)
