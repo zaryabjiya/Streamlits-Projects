@@ -67,10 +67,20 @@ st.markdown(
             margin-top: 15px;
             text-align: center;
         }
-        div[role="radiogroup"] label span {
+        div[data-testid="stRadio"] label, div[data-testid="stSelectbox"] label {
+            font-size: 20px !important;
+            font-weight: bold !important;
+            color: white !important;
+        }
+        div[data-testid="stRadio"] span, div[data-testid="stSelectbox"] span {
             color: white !important;
             font-weight: bold !important;
             font-size: 18px !important;
+        }
+        div[data-baseweb="input"] label {
+            font-size: 18px !important;
+            font-weight: bold !important;
+            color: white !important;
         }
         .footer {
             margin-top: 50px;
