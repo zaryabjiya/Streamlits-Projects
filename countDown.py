@@ -105,7 +105,7 @@ if "remaining_time" not in st.session_state:
 
 # User Input
 st.markdown("<h3 style='color:white; text-align:center;'>⏳ Select Time Format:</h3>", unsafe_allow_html=True)
-time_format = st.radio("Choose:", style='color:white; style='color:white;["Minutes", "Seconds"], index=0)
+time_format = st.radio("Choose:", ["Minutes", "Seconds"], index=0)
 
 if time_format == "Minutes":
     st.markdown("<h3 style='color:yellow; text-align:center;'>⏱️ Enter time in minutes:</h3>", unsafe_allow_html=True)
