@@ -102,10 +102,10 @@ st.subheader("🎯 Set your timer in minutes or seconds and start the countdown!
 if "remaining_time" not in st.session_state:
     st.session_state.remaining_time = 0
     st.session_state.running = False
-
-# User Input
+    
 st.markdown("<h3 style='color:white; text-align:center;'>⏳ Select Time Format:</h3>", unsafe_allow_html=True)
-time_format = st.radio("<span style='color:white;'>Choose:</span>", ["Minutes", "Seconds"], index=0, key="time_format")
+st.markdown("<h4 style='color:white;'>Choose:</h4>", unsafe_allow_html=True)
+time_format = st.radio("", ["Minutes", "Seconds"], index=0, key="time_format")
 
 if time_format == "Minutes":
     st.markdown("<h3 style='color:yellow; text-align:center;'>⏱️ Enter time in minutes:</h3>", unsafe_allow_html=True)
