@@ -10,13 +10,13 @@ st.markdown(
     <style>
         .stApp {
             background: linear-gradient(to right, #1e3c72, #2a5298);
-            color: white;
+            color: white !important;
             text-align: center;
             font-family: 'Arial', sans-serif;
         }
         .stButton>button {
             background-color: #ff5733;
-            color: white;
+            color: white !important;
             padding: 12px 24px;
             font-size: 16px;
             border-radius: 8px;
