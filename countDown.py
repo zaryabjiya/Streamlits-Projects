@@ -67,7 +67,7 @@ st.markdown(
             margin-top: 15px;
             text-align: center;
         }
-        div[data-testid="stRadio"] label {
+        div[data-testid="stRadio"] label, div[data-testid="stSelectbox"] label {
             font-size: 20px !important;
             font-weight: bold !important;
             color: white !important;
