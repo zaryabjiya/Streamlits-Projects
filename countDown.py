@@ -70,7 +70,7 @@ st.markdown(
         div[data-testid="stRadio"] label, div[data-testid="stSelectbox"] label {
             font-size: 20px !important;
             font-weight: bold !important;
-            color: white !important;
+            color: white ;
         }
         div[data-testid="stRadio"] span, div[data-testid="stSelectbox"] span {
             color: white !important;
