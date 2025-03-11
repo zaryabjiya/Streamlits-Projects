@@ -24,17 +24,28 @@ st.markdown(
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s ease-in-out;
+            width: 200px;
+            display: block;
+            margin: 10px auto;
+            box-shadow: 0px 5px 15px rgba(255, 87, 51, 0.6);
         }
         .stButton>button:hover {
             background-color: #c70039;
             transform: scale(1.05);
         }
-        .pause-btn>button {
-            background-color: #f4c542;
-            color: black;
+        .stButton.pause-btn>button {
+            background-color: #f4c542 !important;
+            color: black !important;
         }
-        .pause-btn>button:hover {
-            background-color: #d6a321;
+        .stButton.pause-btn>button:hover {
+            background-color: #d6a321 !important;
+        }
+        .stButton.resume-btn>button {
+            background-color: #1ecb71 !important;
+            color: white !important;
+        }
+        .stButton.resume-btn>button:hover {
+            background-color: #16a85c !important;
         }
         .timer-box {
             background-color: #2a5298;
@@ -47,10 +58,9 @@ st.markdown(
             text-align: center;
         }
         div[data-testid="stRadio"] label {
-            font-size: 22px !important;
+            font-size: 20px !important;
             font-weight: bold !important;
             color: white !important;
-            margin-bottom: 10px !important;
         }
         div[data-baseweb="input"] label {
             font-size: 18px !important;
@@ -80,7 +90,7 @@ if "remaining_time" not in st.session_state:
 
 # User Input
 st.markdown("<h3 style='color:white; text-align:center;'>⏳ Select Time Format:</h3>", unsafe_allow_html=True)
-time_format = st.radio("**Choose:**", ["Minutes", "Seconds"], index=0)
+time_format = st.radio("Choose:", ["Minutes", "Seconds"], index=0)
 
 if time_format == "Minutes":
     st.markdown("<h3 style='color:white; text-align:center;'>⏱️ Enter time in minutes:</h3>", unsafe_allow_html=True)
@@ -92,17 +102,17 @@ else:
     total_seconds = user_time
 
 # Start Button
-if st.button("🚀 Start Countdown"):
+if st.button("🚀 Start Countdown", key="start_button"):
     if total_seconds > 0:
         st.session_state.remaining_time = total_seconds
         st.session_state.running = True
 
 # Pause Button
-if st.button("⏸️ Pause Timer", key="pause_button", help="Pause the countdown timer"):
+if st.button("⏸️ Pause Timer", key="pause_button", help="Pause the countdown timer", args=("pause-btn",)):
     st.session_state.running = False
 
 # Resume Button
-if st.button("▶️ Resume Timer", key="resume_button", help="Resume the countdown timer"):
+if st.button("▶️ Resume Timer", key="resume_button", help="Resume the countdown timer", args=("resume-btn",)):
     st.session_state.running = True
 
 # Timer Logic
