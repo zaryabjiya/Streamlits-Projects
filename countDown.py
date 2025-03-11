@@ -33,18 +33,28 @@ st.markdown(
             background-color: #c70039;
             transform: scale(1.05);
         }
-        .stButton.pause-btn>button {
+        .pause-btn button, .resume-btn button {
+            width: 200px !important;
+            display: block;
+            margin: 10px auto;
+            font-size: 16px !important;
+            font-weight: bold !important;
+            padding: 12px 24px !important;
+            border-radius: 8px !important;
+            transition: 0.3s ease-in-out;
+        }
+        .pause-btn button {
             background-color: #f4c542 !important;
             color: black !important;
         }
-        .stButton.pause-btn>button:hover {
+        .pause-btn button:hover {
             background-color: #d6a321 !important;
         }
-        .stButton.resume-btn>button {
+        .resume-btn button {
             background-color: #1ecb71 !important;
             color: white !important;
         }
-        .stButton.resume-btn>button:hover {
+        .resume-btn button:hover {
             background-color: #16a85c !important;
         }
         .timer-box {
@@ -101,19 +111,22 @@ else:
     user_time = st.number_input("", min_value=0, max_value=3600, step=1, key="seconds_input")
     total_seconds = user_time
 
-# Start Button
-if st.button("🚀 Start Countdown", key="start_button"):
-    if total_seconds > 0:
-        st.session_state.remaining_time = total_seconds
+# Buttons
+col1, col2, col3 = st.columns([1, 1, 1])
+
+with col1:
+    if st.button("🚀 Start Countdown", key="start_button"):
+        if total_seconds > 0:
+            st.session_state.remaining_time = total_seconds
+            st.session_state.running = True
+
+with col2:
+    if st.button("⏸️ Pause Timer", key="pause_button"):
+        st.session_state.running = False
+
+with col3:
+    if st.button("▶️ Resume Timer", key="resume_button"):
         st.session_state.running = True
-
-# Pause Button
-if st.button("⏸️ Pause Timer", key="pause_button", help="Pause the countdown timer", args=("pause-btn",)):
-    st.session_state.running = False
-
-# Resume Button
-if st.button("▶️ Resume Timer", key="resume_button", help="Resume the countdown timer", args=("resume-btn",)):
-    st.session_state.running = True
 
 # Timer Logic
 countdown_placeholder = st.empty()
