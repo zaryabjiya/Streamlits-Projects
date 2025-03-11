@@ -67,20 +67,10 @@ st.markdown(
             margin-top: 15px;
             text-align: center;
         }
-        div[data-testid="stRadio"] label, div[data-testid="stSelectbox"] label {
-            font-size: 20px !important;
-            font-weight: bold !important;
-            color: white !important;
-        }
-        div[data-testid="stRadio"] span, div[data-testid="stSelectbox"] span {
+        div[role="radiogroup"] label span {
             color: white !important;
             font-weight: bold !important;
             font-size: 18px !important;
-        }
-        div[data-baseweb="input"] label {
-            font-size: 18px !important;
-            font-weight: bold !important;
-            color: white !important;
         }
         .footer {
             margin-top: 50px;
@@ -106,15 +96,6 @@ if "remaining_time" not in st.session_state:
 # User Input
 st.markdown("<h3 style='color:white; text-align:center;'>⏳ Select Time Format:</h3>", unsafe_allow_html=True)
 time_format = st.radio("Choose:", ["Minutes", "Seconds"], index=0)
-
-st.markdown("""
-    <style>
-        div[role="radiogroup"] label span {
-            color: white !important;
-            font-weight: bold !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
 
 if time_format == "Minutes":
     st.markdown("<h3 style='color:white; text-align:center;'>⏱️ Enter time in minutes:</h3>", unsafe_allow_html=True)
