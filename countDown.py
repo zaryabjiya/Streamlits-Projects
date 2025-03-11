@@ -8,15 +8,12 @@ st.set_page_config(page_title="⏳ Countdown Timer", page_icon="⏰", layout="ce
 st.markdown(
     """
     <style>
-        /* Background & General Styling */
         .stApp {
             background: linear-gradient(to right, #1e3c72, #2a5298);
             color: white;
             text-align: center;
             font-family: 'Arial', sans-serif;
         }
-
-        /* Buttons */
         .stButton>button {
             background-color: #ff5733;
             color: white;
@@ -32,8 +29,13 @@ st.markdown(
             background-color: #c70039;
             transform: scale(1.05);
         }
-
-        /* Timer Box */
+        .pause-btn>button {
+            background-color: #f4c542;
+            color: black;
+        }
+        .pause-btn>button:hover {
+            background-color: #d6a321;
+        }
         .timer-box {
             background-color: #2a5298;
             color: white;
@@ -44,22 +46,17 @@ st.markdown(
             margin-top: 15px;
             text-align: center;
         }
-
-        /* Radio Button Styling */
         div[data-testid="stRadio"] label {
-            font-size: 20px !important;
+            font-size: 22px !important;
             font-weight: bold !important;
-            color: #ffcc00 !important;
+            color: white !important;
+            margin-bottom: 10px !important;
         }
-
-        /* Number Input Styling */
         div[data-baseweb="input"] label {
             font-size: 18px !important;
             font-weight: bold !important;
             color: white !important;
         }
-
-        /* Footer Styling */
         .footer {
             margin-top: 50px;
             text-align: center;
@@ -73,12 +70,17 @@ st.markdown(
 )
 
 # Title
-st.title("⏳ Countdown Timer")
+st.title("⏳ Countdown Timer with Pause & Resume")
 st.subheader("🎯 Set your timer in minutes or seconds and start the countdown! ⏰")
+
+# Initialize Session State for Timer Control
+if "remaining_time" not in st.session_state:
+    st.session_state.remaining_time = 0
+    st.session_state.running = False
 
 # User Input
 st.markdown("<h3 style='color:white; text-align:center;'>⏳ Select Time Format:</h3>", unsafe_allow_html=True)
-time_format = st.radio("", ["Minutes", "Seconds"])
+time_format = st.radio("**Choose:**", ["Minutes", "Seconds"], index=0)
 
 if time_format == "Minutes":
     st.markdown("<h3 style='color:white; text-align:center;'>⏱️ Enter time in minutes:</h3>", unsafe_allow_html=True)
@@ -89,22 +91,40 @@ else:
     user_time = st.number_input("", min_value=0, max_value=3600, step=1, key="seconds_input")
     total_seconds = user_time
 
-# Start Countdown
+# Start Button
 if st.button("🚀 Start Countdown"):
     if total_seconds > 0:
-        st.markdown("<div class='timer-box'>⏳ Timer Started! Stay Ready! 🚀</div>", unsafe_allow_html=True)
-        
-        countdown_placeholder = st.empty()
-        
-        for remaining in range(total_seconds, 0, -1):
-            mins, secs = divmod(remaining, 60)
-            countdown_placeholder.markdown(f"<div class='timer-box'>🕒 {mins:02}:{secs:02} remaining...</div>", unsafe_allow_html=True)
-            time.sleep(1)
-        
-        st.markdown("<div class='timer-box' style='background-color:#FF5733;'>⏰ Ding Ding! Time’s up! 🚨</div>", unsafe_allow_html=True)
-        st.balloons()
-    else:
-        st.error("⚠️ Please enter a valid time before starting the timer.")
+        st.session_state.remaining_time = total_seconds
+        st.session_state.running = True
+
+# Pause Button
+if st.button("⏸️ Pause Timer", key="pause_button", help="Pause the countdown timer"):
+    st.session_state.running = False
+
+# Resume Button
+if st.button("▶️ Resume Timer", key="resume_button", help="Resume the countdown timer"):
+    st.session_state.running = True
+
+# Timer Logic
+countdown_placeholder = st.empty()
+
+while st.session_state.running and st.session_state.remaining_time > 0:
+    mins, secs = divmod(st.session_state.remaining_time, 60)
+    countdown_placeholder.markdown(
+        f"<div class='timer-box'>🕒 {mins:02}:{secs:02} remaining...</div>", unsafe_allow_html=True
+    )
+    time.sleep(1)
+    st.session_state.remaining_time -= 1
+
+    # If timer is paused, break the loop
+    if not st.session_state.running:
+        break
+
+# When Timer Finishes
+if st.session_state.remaining_time == 0 and st.session_state.running:
+    st.markdown("<div class='timer-box' style='background-color:#FF5733;'>⏰ Ding Ding! Time’s up! 🚨</div>", unsafe_allow_html=True)
+    st.balloons()
+    st.session_state.running = False
 
 # Footer
 st.markdown("<div class='footer'>🚀 Developed by Zaryab Irfan</div>", unsafe_allow_html=True)
