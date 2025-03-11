@@ -19,7 +19,7 @@ st.markdown(
         /* Buttons */
         .stButton>button {
             background-color: #ff5733;
-            color: #ffcc00 !important;
+            color: white;
             padding: 12px 24px;
             font-size: 16px;
             border-radius: 8px;
@@ -36,7 +36,7 @@ st.markdown(
         /* Timer Box */
         .timer-box {
             background-color: #2a5298;
-            color: #ffcc00 !important;
+            color: white;
             font-size: 24px;
             font-weight: bold;
             padding: 15px;
@@ -46,10 +46,17 @@ st.markdown(
         }
 
         /* Radio Button Styling */
-        .stRadio > label {
-            font-size: 18px !important;
+        div[data-testid="stRadio"] label {
+            font-size: 20px !important;
             font-weight: bold !important;
             color: #ffcc00 !important;
+        }
+
+        /* Number Input Styling */
+        div[data-baseweb="input"] label {
+            font-size: 18px !important;
+            font-weight: bold !important;
+            color: white !important;
         }
 
         /* Footer Styling */
@@ -57,7 +64,7 @@ st.markdown(
             margin-top: 50px;
             text-align: center;
             font-size: 14px;
-            color: #ffcc00 !important;
+            color: #ffcc00;
             font-weight: bold;
         }
     </style>
@@ -70,13 +77,16 @@ st.title("⏳ Countdown Timer")
 st.subheader("🎯 Set your timer in minutes or seconds and start the countdown! ⏰")
 
 # User Input
-time_format = st.radio("🔘 **Select Time Format:**", ["Minutes", "Seconds"])
+st.markdown("<h3 style='color:white; text-align:center;'>⏳ Select Time Format:</h3>", unsafe_allow_html=True)
+time_format = st.radio("", ["Minutes", "Seconds"])
 
 if time_format == "Minutes":
-    user_time = st.number_input("⏱️ Enter time in minutes:", min_value=0, max_value=60, step=1, key="minutes_input")
+    st.markdown("<h3 style='color:white; text-align:center;'>⏱️ Enter time in minutes:</h3>", unsafe_allow_html=True)
+    user_time = st.number_input("", min_value=0, max_value=60, step=1, key="minutes_input")
     total_seconds = user_time * 60
 else:
-    user_time = st.number_input("⏳ Enter time in seconds:", min_value=0, max_value=3600, step=1, key="seconds_input")
+    st.markdown("<h3 style='color:white; text-align:center;'>⏳ Enter time in seconds:</h3>", unsafe_allow_html=True)
+    user_time = st.number_input("", min_value=0, max_value=3600, step=1, key="seconds_input")
     total_seconds = user_time
 
 # Start Countdown
