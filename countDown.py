@@ -68,7 +68,7 @@ st.markdown(
             text-align: center;
         }
         div[role="radiogroup"] label span {
-            color: yellow !important;
+            color: white !important;
             font-weight: bold !important;
             font-size: 18px !important;
         }
@@ -94,15 +94,15 @@ if "remaining_time" not in st.session_state:
     st.session_state.running = False
 
 # User Input
-st.markdown("<h3 style='color:yellow; text-align:center;'>⏳ Select Time Format:</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='color:white; text-align:center;'>⏳ Select Time Format:</h3>", unsafe_allow_html=True)
 time_format = st.radio("Choose:", ["Minutes", "Seconds"], index=0)
 
 if time_format == "Minutes":
-    st.markdown("<h3 style='color:yellow; text-align:center;'>⏱️ Enter time in minutes:</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='color:white; text-align:center;'>⏱️ Enter time in minutes:</h3>", unsafe_allow_html=True)
     user_time = st.number_input("", min_value=0, max_value=60, step=1, key="minutes_input")
     total_seconds = user_time * 60
 else:
-    st.markdown("<h3 style='color:yellow; text-align:center;'>⏳ Enter time in seconds:</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='color:white; text-align:center;'>⏳ Enter time in seconds:</h3>", unsafe_allow_html=True)
     user_time = st.number_input("", min_value=0, max_value=3600, step=1, key="seconds_input")
     total_seconds = user_time
 
