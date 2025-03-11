@@ -19,7 +19,7 @@ st.markdown(
         /* Buttons */
         .stButton>button {
             background-color: #ff5733;
-            color: white;
+            color: #ffcc00 !important;
             padding: 12px 24px;
             font-size: 16px;
             border-radius: 8px;
@@ -36,7 +36,7 @@ st.markdown(
         /* Timer Box */
         .timer-box {
             background-color: #2a5298;
-            color: white;
+            color: #ffcc00 !important;
             font-size: 24px;
             font-weight: bold;
             padding: 15px;
@@ -57,7 +57,7 @@ st.markdown(
             margin-top: 50px;
             text-align: center;
             font-size: 14px;
-            color: #ffcc00;
+            color: #ffcc00 !important;
             font-weight: bold;
         }
     </style>
