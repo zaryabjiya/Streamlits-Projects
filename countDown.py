@@ -8,31 +8,14 @@ st.set_page_config(page_title="⏳ Countdown Timer", page_icon="⏰", layout="ce
 st.markdown(
     """
     <style>
-        /* Background & Text */
         .stApp {
             background: linear-gradient(to right, #1e3c72, #2a5298);
             color: white;
             text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
-        
-        /* Timer Box */
-        .timer-box {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            text-align: center;
-            width: 50%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Buttons (Common) */
         .stButton>button {
+            background-color: #ff5733;
             color: white;
             padding: 12px 24px;
             font-size: 16px;
@@ -46,17 +29,10 @@ st.markdown(
             margin: 10px auto;
             box-shadow: 0px 5px 15px rgba(255, 87, 51, 0.6);
         }
-
-        /* Start Button */
-        .stButton.start-btn>button {
-            background-color: #ff5733 !important;
-        }
-        .stButton.start-btn>button:hover {
-            background-color: #c70039 !important;
+        .stButton>button:hover {
+            background-color: #c70039;
             transform: scale(1.05);
         }
-
-        /* Pause Button */
         .stButton.pause-btn>button {
             background-color: #f4c542 !important;
             color: black !important;
@@ -64,8 +40,6 @@ st.markdown(
         .stButton.pause-btn>button:hover {
             background-color: #d6a321 !important;
         }
-
-        /* Resume Button */
         .stButton.resume-btn>button {
             background-color: #1ecb71 !important;
             color: white !important;
@@ -73,15 +47,26 @@ st.markdown(
         .stButton.resume-btn>button:hover {
             background-color: #16a85c !important;
         }
-
-        /* Radio Button Styling (Minutes/Seconds) */
+        .timer-box {
+            background-color: #2a5298;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+        }
         div[data-testid="stRadio"] label {
+            font-size: 20px !important;
+            font-weight: bold !important;
+            color: white !important;
+        }
+        div[data-baseweb="input"] label {
             font-size: 18px !important;
             font-weight: bold !important;
             color: white !important;
         }
-
-        /* Footer */
         .footer {
             margin-top: 50px;
             text-align: center;
@@ -105,7 +90,7 @@ if "remaining_time" not in st.session_state:
 
 # User Input
 st.markdown("<h3 style='color:white; text-align:center;'>⏳ Select Time Format:</h3>", unsafe_allow_html=True)
-time_format = st.radio("", ["Minutes", "Seconds"], index=0)
+time_format = st.radio("Choose:", ["Minutes", "Seconds"], index=0)
 
 if time_format == "Minutes":
     st.markdown("<h3 style='color:white; text-align:center;'>⏱️ Enter time in minutes:</h3>", unsafe_allow_html=True)
@@ -123,11 +108,11 @@ if st.button("🚀 Start Countdown", key="start_button"):
         st.session_state.running = True
 
 # Pause Button
-if st.button("⏸️ Pause Timer", key="pause_button", help="Pause the countdown timer"):
+if st.button("⏸️ Pause Timer", key="pause_button", help="Pause the countdown timer", args=("pause-btn",)):
     st.session_state.running = False
 
 # Resume Button
-if st.button("▶️ Resume Timer", key="resume_button", help="Resume the countdown timer"):
+if st.button("▶️ Resume Timer", key="resume_button", help="Resume the countdown timer", args=("resume-btn",)):
     st.session_state.running = True
 
 # Timer Logic
